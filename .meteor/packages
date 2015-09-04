@@ -12,3 +12,4 @@ bootstrap
 insecure
 coffeescript
 iron:router
+http
