@@ -30,7 +30,7 @@ Template.map.rendered = function() {
   var query = Ships.find();
   query.observe({
     added: function (document) {
-      var marker = L.marker(document.latlng,{_id: 1,icon: createIcon()
+      var marker = L.marker(document.latlng,{_id: 1,icon: createIcon(document.travel.speed)
       }).addTo(map)
         .on('click', function(event) {
           map.removeLayer(marker);
@@ -57,8 +57,11 @@ Template.map.rendered = function() {
     Session.set("showCreateDialog", true);
   };
 
-  var createIcon = function() {
-  var className = 'leaflet-div-icon public';
+  var createIcon = function(speed) {
+  var className = 'leaflet-div-icon ';
+  //className += speed>0 ? 'public' : 'private';
+  if (speed == 0) className += "public";
+  if (speed > 0) className += "private";
   return L.divIcon({
     iconSize: [30, 30],
 //    html: 'test',
