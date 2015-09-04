@@ -1,7 +1,7 @@
-<template name="page">
+<template name="index">
             {{#if showCreateDialog}}
     {{> createDialog}}
-  {{/if}} 
+  {{/if}}
      <div class="navbar navbar-default badge-primary navbar-fixed-top">
      <div class="navbar-header"><a class="navbar-brand" href="#">Brand</a>
           <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,13 +18,13 @@
             <li><a href="#">Options</a></li>
           </ul>
         </div>
-        
+
     </div>
     <div id="map-canvas"></div>
     <div class="container-fluid">
     <div class="row-fluid">
       <div class="span4">
-        {{> details}} 
+        {{> details}}
       </div>
       <div class="span8">
           {{> map}}

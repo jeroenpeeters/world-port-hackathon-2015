@@ -4,14 +4,7 @@ Meteor.startup(function() {
     $('#map').css('height', window.innerHeight - 82 - 45);
   });
   $(window).resize(); // trigger resize event
-
-  Meteor.subscribe('parties');
 });
-
-// create marker collection
-var Markers = new Meteor.Collection('markers');
-
-Meteor.subscribe('markers');
 
 Template.map.rendered = function() {
   //L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images';
@@ -24,19 +17,24 @@ Template.map.rendered = function() {
   L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',{opacity:.5}).addTo(map);
 
   map.on('dblclick', function(event) {
-    Markers.insert({latlng: event.latlng});
+    Meteor.call('createShip', {
+      title: 'title',
+      description: 'descr',
+      latlng: event.latlng
+    });
+    //Markers.insert({latlng: event.latlng});
     console.log('dbclick');
-    openCreateDialog(event.latlng);
+    //openCreateDialog(event.latlng);
   });
 
-  var query = Markers.find();
+  var query = Ships.find();
   query.observe({
     added: function (document) {
       var marker = L.marker(document.latlng,{_id: 1,icon: createIcon()
       }).addTo(map)
         .on('click', function(event) {
           map.removeLayer(marker);
-          Markers.remove({_id: document._id});
+          Ships.remove({_id: document._id});
         });
     },
     removed: function (oldDocument) {

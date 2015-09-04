@@ -11,3 +11,4 @@ browser-policy
 bootstrap
 insecure
 coffeescript
+iron:router

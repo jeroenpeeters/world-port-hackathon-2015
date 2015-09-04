@@ -1,4 +1,4 @@
-Template.page.helpers({
+Template.index.helpers({
   showCreateDialog: function () {
     return Session.get("showCreateDialog");
   }
