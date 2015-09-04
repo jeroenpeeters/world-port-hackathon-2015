@@ -1,5 +1,5 @@
 // marker collection
-var Markers = new Meteor.Collection('markers');
+var Markers = new Mongo.Collection('markers');
 Meteor.publish("markers", function () {
   return Markers.find();
 });

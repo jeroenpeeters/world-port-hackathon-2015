@@ -10,3 +10,4 @@ webapp
 browser-policy
 bootstrap
 insecure
+coffeescript

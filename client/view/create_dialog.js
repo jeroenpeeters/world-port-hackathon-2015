@@ -15,6 +15,7 @@ Template.createDialog.events({
         latlng: latlng,
         public: public
       }, function (error, party) {
+        console.log('createPartyCallback', error, party);
         if (! error) {
           Session.set("selected", party);
           if (! public && Meteor.users.find().count() > 1)

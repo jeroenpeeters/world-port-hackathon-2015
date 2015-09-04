@@ -3,9 +3,11 @@ Meteor.startup(function() {
   $(window).resize(function() {
     $('#map').css('height', window.innerHeight - 82 - 45);
   });
-  $(window).resize(); // trigger resize event 
+  $(window).resize(); // trigger resize event
+
+  Meteor.subscribe('parties');
 });
- 
+
 // create marker collection
 var Markers = new Meteor.Collection('markers');
 
@@ -50,19 +52,19 @@ Template.map.rendered = function() {
       }
     }
   });
-  
+
   var openCreateDialog = function (latlng) {
     console.log('set flag showCreateDialog');
     Session.set("createCoords", latlng);
     Session.set("showCreateDialog", true);
   };
-  
+
   var createIcon = function() {
   var className = 'leaflet-div-icon public';
   return L.divIcon({
     iconSize: [30, 30],
 //    html: 'test',
-    className: className  
+    className: className
   });
 };
 }
