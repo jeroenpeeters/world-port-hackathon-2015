@@ -13,9 +13,9 @@ renew = ->
             heading: item.heading
           coc: item
     else
-      console.log 'Unable to renew data from captainsofcode', data?.err
+      console.log 'Unable to renew data from captainsofcode', result.err
   catch err
-    console.log 'Unable to fetch data from captainsofcode', data?.err
+    console.log 'Unable to fetch data from captainsofcode', err
 
 Meteor.setInterval renew, 5000
 
