@@ -94,9 +94,9 @@ Template.map.rendered = function() {
 
   var createIcon = function(speed) {
     var className = 'leaflet-div-icon ';
-    //className += speed>0 ? 'public' : 'private';
-    if (speed == 0) className += "stopped";
-    if (speed > 0) className += "moving";
+
+    if (speed < 5) className += "stopped";
+    if (speed > 5) className += "moving";
     return L.divIcon({
       iconSize: [30, 30],
   //    html: 'test',
