@@ -5,7 +5,9 @@
 
       <hr>
 
-      <input type="text" id="shipname" />
+      <div class="ui icon input" style="padding-bottom: 10px;width: 100%;">
+        <input type="text" id="shipname" placeholder="Search...">
+      </div>
 
       <div class="ui special cards">
       {{#each allShips}}
@@ -26,12 +28,6 @@
               <span class="date">{{mmsi}}</span>
             </div>
           </div>
-          <!--div class="extra content">
-            <a>
-              <i class="users icon"></i>
-              2 Members
-            </a>
-          </div-->
         </div>
       {{/each}}
       </div>
