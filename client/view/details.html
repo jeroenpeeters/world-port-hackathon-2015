@@ -6,13 +6,21 @@
       <hr>
 
       {{#each allShips}}
-        <div class="panel panel-default">
-           <div class="panel-heading"><a href="">mmsi: {{mmsi}}</a></div>
+        <div class="ui items">
+          <div class="item">
+            <a class="ui small image">
+              <img src="{{details.image.src}}">
+            </a>
+            <div class="content">
+              <a class="header">{{details.shipname}} ({{mmsi}})</a>
+              <div class="description">
+                <p> speed: {{travel.speed}}</p>
+                <p> course: {{travel.course}}</p>
+                <p> heading: {{travel.heading}}</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <p> speed: {{coc.speed}}</p>
-        <p> course: {{coc.course}}</p>
-        <p> heading: {{coc.heading}}</p>
-        <hr>
       {{/each}}
-        
+
 </template>

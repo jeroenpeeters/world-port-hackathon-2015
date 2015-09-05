@@ -2,11 +2,11 @@
   {{#if showCreateDialog}}
     {{> createDialog}}
   {{/if}}
-  <div class="ui grid">
-    <div class="four wide column" style="padding-left:50px; padding-top:10px;">
+  <div class="ui grid" style="height: 100%">
+    <div class="four wide column" style="padding-left:50px; padding-top:10px; overflow-y:scroll; ">
       {{> details}}
     </div>
-    <div class="twelve wide column">
+    <div class="twelve wide column" style="padding-left: 0px;">
       {{> map}}
     </div>
   </div>
