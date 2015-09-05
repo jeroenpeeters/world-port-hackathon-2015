@@ -1,1 +1,1 @@
-Meteor.publish 'parties', -> Parties.find()
+Meteor.publish 'ships', -> Ships.find()
