@@ -1,6 +1,12 @@
 <template name="map">
       {{#with selectedShip}}
-        <div class="shipDetails">{{details.shipname}} - {{mmsi}}</div>
+        <div class="shipDetails">{{details.shipname}} - {{mmsi}}
+        {{#with locationHistory}}
+          Has location history
+        {{/with}}
+
+        </div>
+
       {{/with}}
       <div id="map" class="map"></div>
 

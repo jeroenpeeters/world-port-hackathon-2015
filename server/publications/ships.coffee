@@ -11,6 +11,7 @@ Meteor.publish 'ships', (filter) ->
     ]
   ,
     fields: {locationHistory: 0}
-    
-Meteor.publish 'shipHistory', (mmsi) ->
-  Ships.find {mmsi: mmsi}, fields: {locationHistory: 1}
+
+Meteor.publish 'shipHistory', (id) ->
+  console.log 'publishing ships history for', id
+  Ships.find {_id: id}, fields: {locationHistory: 1}
