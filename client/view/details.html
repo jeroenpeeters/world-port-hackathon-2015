@@ -6,7 +6,6 @@
       <hr>
 
       <input type="text" id="shipname" />
-
       {{#each allShips}}
         <div class="ui items">
           <div class="item">
@@ -14,7 +13,7 @@
               <img src="{{details.image.src}}">
             </a>
             <div class="content">
-              <a class="header">{{details.shipname}} ({{mmsi}})</a>
+              <a id="gothere" class="header">{{details.shipname}} ({{mmsi}})</a>
               <div class="description">
                 <p> speed: {{travel.speed}}</p>
                 <p> course: {{travel.course}}</p>
