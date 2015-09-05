@@ -6,20 +6,6 @@
       <hr>
 
       <input type="text" id="shipname" />
-<<<<<<< HEAD
-      {{#each allShips}}
-        <div class="ui items">
-          <div class="item">
-            <a class="ui small image">
-              <img src="{{details.image.src}}">
-            </a>
-            <div class="content">
-              <a id="gothere" class="header">{{details.shipname}} ({{mmsi}})</a>
-              <div class="description">
-                <p> speed: {{travel.speed}}</p>
-                <p> course: {{travel.course}}</p>
-                <p> heading: {{travel.heading}}</p>
-=======
 
       <div class="ui special cards">
       {{#each allShips}}
@@ -30,13 +16,12 @@
                 <div class="center">
                   <div class="ui inverted button">Highlight on map</div>
                 </div>
->>>>>>> edc80c76dd7d172c9445cc0109143ebc2c3dee2e
               </div>
             </div>
             <img src="{{details.image.src}}">
           </div>
           <div class="content">
-            <a class="header">{{details.shipname}}</a>
+            <a id="gothere" class="header">{{details.shipname}}</a>
             <div class="meta">
               <span class="date">{{mmsi}}</span>
             </div>
