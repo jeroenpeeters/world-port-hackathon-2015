@@ -28,16 +28,39 @@ renew = ->
             course: item.course
             heading: item.heading
           Ships.upsert {mmsi: ship.mmsi}, ship
-          console.log 'Only updating ship travel info'
+          #console.log 'Only updating ship travel info'
         else
-          console.log 'enrich ship with details'
-          enrichWithDetails
+          #console.log 'enrich ship with details'
+          Ships.insert
             mmsi: item.mmsi
             latlng: {lat: item.lat, lng: item.lon}
             travel:
               speed: item.speed
               course: item.course
               heading: item.heading
+          fetchShipDetails mmsi: item.mmsi
+          fetchShipLocationHistory mmsi: item.mmsi
+    else
+      console.log 'MarineTraffic API returned an error', result.err
+  catch err
+    console.log 'Unable to fetch ship details from MarineTraffic API', err
+
+fetchShipLocationHistory = (task) ->
+  console.log "Getting ship location history for ship with mmsi #{task.mmsi}"
+  result = HTTP.get "http://www.captainsofcode.gr/loc?dates=1439856000,1441442831&MMSI=#{task.mmsi}"
+  if result?.data
+    sortedData = lodash.sortByAll result.data, 'timestamp'
+    Ships.update {mmsi: task.mmsi}, $set: locationHistory: sortedData
+
+fetchShipDetails = (task) ->
+  try
+    console.log "Getting ship details for ship with mmsi #{task.mmsi}"
+    result = HTTP.get "http://www.captainsofcode.gr/ship?MMSI=#{task.mmsi}"
+    if result.data and result.data.length > 0
+      details = result.data[0]
+      details.image =
+        src: "http://photos.marinetraffic.com/ais/showphoto.aspx?mmsi=#{task.mmsi}"
+      Ships.update {mmsi: task.mmsi}, $set: details: details
     else
       console.log 'MarineTraffic API returned an error', result.err
   catch err

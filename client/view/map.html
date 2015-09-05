@@ -1,5 +1,7 @@
 <template name="map">
-
+      {{#with selectedShip}}
+        <div class="shipDetails">{{details.shipname}} - {{mmsi}}</div>
+      {{/with}}
       <div id="map" class="map"></div>
-    
+
 </template>

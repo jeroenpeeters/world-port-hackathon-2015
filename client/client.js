@@ -13,15 +13,34 @@ Template.map.rendered = function() {
 //  L.tileLayer.provider('Thunderforest.Outdoors').addTo(map);
   L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',{opacity:.5}).addTo(map);
 
+  map.invalidateSize()
+
   map.on('dblclick', function(event) {
-    Meteor.call('createShip', {
+    /*Meteor.call('createShip', {
       title: 'title',
       description: 'descr',
       latlng: event.latlng
-    });
+    });*/
     //Markers.insert({latlng: event.latlng});
     console.log('dbclick');
     //openCreateDialog(event.latlng);
+  });
+
+  map.on('moveend', function(event){
+    var bounds = map.getBounds();
+    ne = bounds.getNorthEast()
+    sw = bounds.getSouthWest()
+    filter = {
+      min:{
+        lat: sw.lat,
+        lng: sw.lng
+      },
+      max:{
+        lat: ne.lat,
+        lng: ne.lng
+      }
+    }
+    Session.set('boundsFilter', filter);
   });
 
   var query = Ships.find();
@@ -30,8 +49,10 @@ Template.map.rendered = function() {
       var marker = L.marker(document.latlng,{_id: 1,icon: createIcon(document.travel.speed)
       }).addTo(map)
         .on('click', function(event) {
-          map.removeLayer(marker);
-          Ships.remove({_id: document._id});
+          Session.set('selectedShip', document);
+          console.log('selected:', marker);
+          //map.removeLayer(marker);
+          //Ships.remove({_id: document._id});
         });
     },
     removed: function (oldDocument) {
