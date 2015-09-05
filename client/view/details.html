@@ -7,22 +7,39 @@
 
       <input type="text" id="shipname" />
 
+      <div class="ui special cards">
       {{#each allShips}}
-        <div class="ui items">
-          <div class="item">
-            <a class="ui small image">
-              <img src="{{details.image.src}}">
+        <div class="card">
+          <div class="blurring dimmable image">
+            <div class="ui dimmer">
+              <div class="content">
+                <div class="center">
+                  <div class="ui inverted button">Highlight on map</div>
+                </div>
+              </div>
+            </div>
+            <img src="{{details.image.src}}">
+          </div>
+          <div class="content">
+            <a class="header">{{details.shipname}}</a>
+            <div class="meta">
+              <span class="date">{{mmsi}}</span>
+            </div>
+          </div>
+          <!--div class="extra content">
+            <a>
+              <i class="users icon"></i>
+              2 Members
             </a>
-            <div class="content">
-              <a class="header">{{details.shipname}} ({{mmsi}})</a>
-              <div class="description">
+          </div-->
+        </div>
+      {{/each}}
+      </div>
+
+              <!--div class="description">
                 <p> speed: {{travel.speed}}</p>
                 <p> course: {{travel.course}}</p>
                 <p> heading: {{travel.heading}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      {{/each}}
+              </div-->
 
 </template>

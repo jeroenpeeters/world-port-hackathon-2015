@@ -42,6 +42,9 @@
 .leaflet-div-icon.moving {
     background: #DA4F49;
 }
+.leaflet-div-icon.history {
+    background: yellow;
+}
 
 .invite-row .invite {
     margin: 10px 10px 10px 0;

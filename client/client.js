@@ -49,7 +49,7 @@ Template.map.rendered = function() {
       var marker = L.marker(document.latlng,{_id: 1,icon: createIcon(document.travel.speed)
       }).addTo(map)
         .on('click', function(event) {
-          Session.set('selectedShip', document);
+          Session.set('selectedShipId', document._id);
           console.log('selected:', marker);
           //map.removeLayer(marker);
           //Ships.remove({_id: document._id});
@@ -69,6 +69,23 @@ Template.map.rendered = function() {
     }
   });
 
+  historyLayer = null
+  var q = HistoryData.find();
+  q.observe({
+    added: function (document) {
+      if(historyLayer){
+        map.removeLayer(historyLayer);
+      }
+      historyLayer = L.polyline(document.points, {color: 'yellow'});
+      historyLayer.addTo(map);
+    },
+    removed: function (oldDocument) {
+      if(historyLayer){
+        map.removeLayer(historyLayer);
+      }
+    }
+  });
+
   var openCreateDialog = function (latlng) {
     console.log('set flag showCreateDialog');
     Session.set("createCoords", latlng);
@@ -76,16 +93,22 @@ Template.map.rendered = function() {
   };
 
   var createIcon = function(speed) {
-  var className = 'leaflet-div-icon ';
-  //className += speed>0 ? 'public' : 'private';
-  if (speed == 0) className += "stopped";
-  if (speed > 0) className += "moving";
-  return L.divIcon({
-    iconSize: [30, 30],
-//    html: 'test',
-    className: className
-  });
-};
+    var className = 'leaflet-div-icon ';
+    //className += speed>0 ? 'public' : 'private';
+    if (speed == 0) className += "stopped";
+    if (speed > 0) className += "moving";
+    return L.divIcon({
+      iconSize: [30, 30],
+  //    html: 'test',
+      className: className
+    });
+  };
+  var createHistoryIcon = function(speed) {
+    return L.divIcon({
+      iconSize: [10, 10],
+      className: 'leaflet-div-icon history'
+    });
+  };
 
   setTimeout(function(){
     $(window).resize(function() {
