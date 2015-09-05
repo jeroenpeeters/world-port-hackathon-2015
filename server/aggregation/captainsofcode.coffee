@@ -1,3 +1,48 @@
+northWest = (latlng, halfWidth, halfLength) ->
+  loc = new LatLong(latlng.lat, latlng.lng)
+  loc.moveNorth halfWidth
+  loc.moveWest halfLength
+  {
+    lat: loc.lat
+    lng: loc.long
+  }
+
+northEast = (latlng, halfWidth, halfLength) ->
+  loc = new LatLong(latlng.lat, latlng.lng)
+  loc.moveNorth halfWidth
+  loc.moveEast halfLength
+  {
+    lat: loc.lat
+    lng: loc.long
+  }
+
+southWest = (latlng, halfWidth, halfLength) ->
+  loc = new LatLong(latlng.lat, latlng.lng)
+  loc.moveSouth halfWidth
+  loc.moveWest halfLength
+  {
+    lat: loc.lat
+    lng: loc.long
+  }
+
+southEast = (latlng, halfWidth, halfLength) ->
+  loc = new LatLong(latlng.lat, latlng.lng)
+  loc.moveSouth halfWidth
+  loc.moveEast halfLength
+  {
+    lat: loc.lat
+    lng: loc.long
+  }
+
+bounds = (details, latlng)->
+  halfWidth = details.width/2
+  halfLength = details.length/2
+  nw = northWest(latlng, halfWidth, halfLength)
+  ne = northEast(latlng, halfWidth, halfLength)
+  sw = southWest(latlng, halfWidth, halfLength)
+  se = southEast(latlng, halfWidth, halfLength)
+  return [[nw, ne], [sw, se]]
+
 enrichWithDetails = (ship) ->
   try
     console.log "Getting ship details for ship with mmsi #{ship.mmsi}"
@@ -11,6 +56,7 @@ enrichWithDetails = (ship) ->
       console.log 'MarineTraffic API returned an error', result.err
   catch err
     console.log 'Unable to fetch ship details from MarineTraffic API', err
+
 
 renew = ->
   try
@@ -27,6 +73,9 @@ renew = ->
             speed: item.speed
             course: item.course
             heading: item.heading
+
+          if ship.details
+            ship.bounds = bounds ship.details, ship.latlng
           Ships.upsert {mmsi: ship.mmsi}, ship
           #console.log 'Only updating ship travel info'
         else

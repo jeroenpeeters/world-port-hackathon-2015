@@ -3,10 +3,12 @@ Meteor.startup(function() {
 
 });
 
+map = null;
+
 Template.map.rendered = function() {
   //L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images';
 
-  var map = L.map('map', {
+  map = L.map('map', {
     doubleClickZoom: false
   }).setView([51.9000, 4.40259933], 13);
 
@@ -43,9 +45,15 @@ Template.map.rendered = function() {
     Session.set('boundsFilter', filter);
   });
 
+  //LatLong = Meteor.npmRequire('simple-latlong')
   var query = Ships.find();
   query.observe({
     added: function (document) {
+      // length
+      // width
+      /*if(document.bounds){
+        L.rectangle(document.bounds, {color: "#ff7800", weight: 1}).addTo(map);
+      }*/
       var marker = L.marker(document.latlng,{_id: 1,icon: createIcon(document.travel.speed)
       }).addTo(map)
         .on('click', function(event) {
