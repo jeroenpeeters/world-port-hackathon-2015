@@ -14,7 +14,7 @@ html,body{
 }
 
 body{
-  	padding-top:50px; /*padding for navbar*/
+  	/*padding-top:50px; padding for navbar*/
 }
 
 .navbar-custom .icon-bar {
@@ -54,11 +54,5 @@ body{
 }
 
 #map-canvas {
-	width:33.3333%;
-    height:calc(100% - 0);
-    position:absolute;
-    right:16px;
-    top:50px;
-    bottom:0;
-    overflow:hidden;
+
 }

@@ -35,11 +35,11 @@
     vertical-align:middle;
 }
 
-.leaflet-div-icon.public {
+.leaflet-div-icon.stopped {
     background: #49AFCD;
 }
 
-.leaflet-div-icon.private {
+.leaflet-div-icon.moving {
     background: #DA4F49;
 }
 

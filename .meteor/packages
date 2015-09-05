@@ -8,8 +8,9 @@ meteor-platform
 bevanhunt:leaflet
 webapp
 browser-policy
-bootstrap
 insecure
 coffeescript
 iron:router
 http
+semantic:ui
+flemay:less-autoprefixer

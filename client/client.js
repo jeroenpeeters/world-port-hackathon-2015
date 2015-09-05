@@ -1,9 +1,6 @@
 // on startup run resizing event
 Meteor.startup(function() {
-  $(window).resize(function() {
-    $('#map').css('height', window.innerHeight - 82 - 45);
-  });
-  $(window).resize(); // trigger resize event
+
 });
 
 Template.map.rendered = function() {
@@ -60,12 +57,20 @@ Template.map.rendered = function() {
   var createIcon = function(speed) {
   var className = 'leaflet-div-icon ';
   //className += speed>0 ? 'public' : 'private';
-  if (speed == 0) className += "public";
-  if (speed > 0) className += "private";
+  if (speed == 0) className += "stopped";
+  if (speed > 0) className += "moving";
   return L.divIcon({
     iconSize: [30, 30],
 //    html: 'test',
     className: className
   });
 };
+
+  setTimeout(function(){
+    $(window).resize(function() {
+      $('#map').css('height', window.innerHeight - 1);
+    });
+    $(window).resize(); // trigger resize event
+  }, 500);
+
 }

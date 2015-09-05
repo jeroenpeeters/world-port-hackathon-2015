@@ -45,4 +45,4 @@ renew = ->
 
 Meteor.setInterval renew, 20000
 
-renew()
+#renew()
