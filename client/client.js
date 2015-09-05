@@ -51,9 +51,10 @@ Template.map.rendered = function() {
     added: function (document) {
       // length
       // width
-      /*if(document.bounds){
+      if(document.bounds){
+        console.log(document.bounds);
         L.rectangle(document.bounds, {color: "#ff7800", weight: 1}).addTo(map);
-      }*/
+      }
       var marker = L.marker(document.latlng,{_id: 1,icon: createIcon(document.travel.speed)
       }).addTo(map)
         .on('click', function(event) {

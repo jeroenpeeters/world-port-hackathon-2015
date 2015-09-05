@@ -1,4 +1,4 @@
-northWest = (latlng, halfWidth, halfLength) ->
+northWest = (latlng, gamma, halfWidth, halfLength) ->
   loc = new LatLong(latlng.lat, latlng.lng)
   loc.moveNorth halfWidth
   loc.moveWest halfLength
@@ -7,7 +7,7 @@ northWest = (latlng, halfWidth, halfLength) ->
     lng: loc.long
   }
 
-northEast = (latlng, halfWidth, halfLength) ->
+northEast = (latlng, gamma, halfWidth, halfLength) ->
   loc = new LatLong(latlng.lat, latlng.lng)
   loc.moveNorth halfWidth
   loc.moveEast halfLength
@@ -16,7 +16,7 @@ northEast = (latlng, halfWidth, halfLength) ->
     lng: loc.long
   }
 
-southWest = (latlng, halfWidth, halfLength) ->
+southWest = (latlng, gamma, halfWidth, halfLength) ->
   loc = new LatLong(latlng.lat, latlng.lng)
   loc.moveSouth halfWidth
   loc.moveWest halfLength
@@ -25,7 +25,7 @@ southWest = (latlng, halfWidth, halfLength) ->
     lng: loc.long
   }
 
-southEast = (latlng, halfWidth, halfLength) ->
+southEast = (latlng, gamma, halfWidth, halfLength) ->
   loc = new LatLong(latlng.lat, latlng.lng)
   loc.moveSouth halfWidth
   loc.moveEast halfLength
@@ -34,13 +34,19 @@ southEast = (latlng, halfWidth, halfLength) ->
     lng: loc.long
   }
 
-bounds = (details, latlng)->
+###
+lat: (loc.lat * Math.cos(gamma)) - (loc.long * Math.sin(gamma))
+lng: (loc.lat * Math.sin(gamma)) + (loc.long * Math.cos(gamma))
+###
+
+bounds = (details, heading, latlng)->
   halfWidth = details.width/2
   halfLength = details.length/2
-  nw = northWest(latlng, halfWidth, halfLength)
-  ne = northEast(latlng, halfWidth, halfLength)
-  sw = southWest(latlng, halfWidth, halfLength)
-  se = southEast(latlng, halfWidth, halfLength)
+  gamma = heading - 270
+  nw = northWest(latlng, gamma, halfWidth, halfLength)
+  ne = northEast(latlng, gamma, halfWidth, halfLength)
+  sw = southWest(latlng, gamma, halfWidth, halfLength)
+  se = southEast(latlng, gamma, halfWidth, halfLength)
   return [[nw, ne], [sw, se]]
 
 enrichWithDetails = (ship) ->
@@ -75,7 +81,7 @@ renew = ->
             heading: item.heading
 
           if ship.details
-            ship.bounds = bounds ship.details, ship.latlng
+            ship.bounds = bounds ship.details, item.heading, ship.latlng
           Ships.upsert {mmsi: ship.mmsi}, ship
           #console.log 'Only updating ship travel info'
         else
