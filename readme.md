@@ -1,9 +1,7 @@
-# Leaflet for Meteor Demo
+# Rotterdam World Port Hackathon 2015
 
-## Demos
-- Web: meteor run or http://leaflet.meteor.com
-- Android: meteor run android
-- iPhone: meteor run ios
+This repository hosts the result of the hacking session of me and @nabildotkhalil during the Rotterdam World Port Hackathon 2015.
 
-## License
-MIT
+## Demo
+- http://portcockpit.meteor.com/ - due  to a strange bug you have to refresh your browser, didn't had time to fix that ;)
+
