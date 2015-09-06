@@ -121,6 +121,6 @@ fetchShipDetails = (task) ->
   catch err
     console.log 'Unable to fetch ship details from MarineTraffic API', err
 
-Meteor.setInterval renew, 20000
+#Meteor.setInterval renew, 20000
 
 #renew()

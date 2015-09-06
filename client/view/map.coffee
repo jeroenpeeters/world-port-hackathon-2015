@@ -11,3 +11,7 @@ Template.map.helpers
       HistoryData.insert points: history
 
     ship
+
+Template.map.events
+  'click #closeButton': ->
+    Session.set 'selectedShipId', null

@@ -59,7 +59,7 @@ Template.map.rendered = function() {
       }).addTo(map)
         .on('click', function(event) {
           Session.set('selectedShipId', document._id);
-          console.log('selected:', marker);
+          //console.log('selected:', marker);
           //map.removeLayer(marker);
           //Ships.remove({_id: document._id});
         });

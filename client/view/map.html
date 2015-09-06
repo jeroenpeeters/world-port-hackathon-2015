@@ -1,9 +1,59 @@
 <template name="map">
       {{#with selectedShip}}
-        <div class="shipDetails">{{details.shipname}} - {{mmsi}}
-        {{#with locationHistory}}
-          Has location history
-        {{/with}}
+        <div class="shipDetails">
+
+          <div class="ui grid">
+            <div class="eight wide column">
+              <h3 class="ui header">
+                <div class="content">
+                  {{details.shipname}}
+                </div>
+              </h3>
+              MMSI: {{mmsi}}
+            </div>
+            <div class="eight wide column">
+              <button id="closeButton" class="ui primary button">
+                Close
+              </button>
+            </div>
+          </div>
+
+          <table class="ui padded table">
+            <tbody>
+              <tr>
+                <td>Latitude</td>
+                <td>{{latlng.lat}}</td>
+              </tr>
+              <tr>
+                <td>Longitute</td>
+                <td>{{latlng.lng}}</td>
+              </tr>
+              <tr>
+                <td>Course</td>
+                <td>{{travel.course}}</td>
+              </tr>
+              <tr>
+                <td>Heading</td>
+                <td>{{travel.heading}}</td>
+              </tr>
+              <tr>
+                <td>Speed</td>
+                <td>{{travel.speed}}</td>
+              </tr>
+              <tr>
+                <td>Country</td>
+                <td>{{details.country}}</td>
+              </tr>
+              <tr>
+                <td>Type</td>
+                <td>{{details.type_name}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          {{#with locationHistory}}
+
+          {{/with}}
 
         </div>
 
