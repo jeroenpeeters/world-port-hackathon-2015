@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "meteor.cuetasks" }, { "v" : 1, "key" : { "jobName" : 1, "doing" : 1, "createdAt" : 1, "delayUntil" : 1 }, "name" : "jobName_1_doing_1_createdAt_1_delayUntil_1", "ns" : "meteor.cuetasks", "safe" : true } ] }
